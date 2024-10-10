@@ -1,6 +1,7 @@
 <template>
   <div
     class="w-candidate h-candidate flex flex-col justify-between bg-light-grey border border-border rounded-xl p-2 box-border mb-4"
+    data-test-id="candidate-card"
   >
     <div class="flex items-stretch">
       <p class="w-10/12 font-bold truncate text-normal">{{ userName }}</p>

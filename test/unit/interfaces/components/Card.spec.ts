@@ -1,52 +1,84 @@
-// tests/unit/Card.spec.ts
+import { mount, shallowMount } from '@vue/test-utils'
+import { describe, it, expect, beforeEach, vi } from 'vitest'
+import CardComponent from '../../../../src/interfaces/components/Card.vue'
+import CandidateCard from '../../../../src/interfaces/components/CandidateCard.vue'
+import { useCandidateStore } from '../../../../src/interfaces/stores/useCandidateStore'
 
-import { mount } from '@vue/test-utils'
-import Card from '../../../../src/interfaces/components/Card.vue'
-import { describe, it, expect, vi } from 'vitest'
-
-// Simular la tienda de candidatos
 vi.mock('@/interfaces/stores/useCandidateStore', () => ({
-  useCandidateStore: () => ({
-    getCandidates: [
-      { id: 1, statusId: 1, name: 'John Doe' },
-      { id: 2, statusId: 2, name: 'Jane Smith' }
-    ]
-  })
+  useCandidateStore: vi.fn()
 }))
 
-describe('Card.vue', () => {
-  const config = { order: 1, id: 1, name: 'Test Card' }
+describe('CardComponent.vue', () => {
+  const config = {
+    id: 1,
+    name: 'Test Name',
+    order: 1
+  }
 
-  it('renders correctly with props', () => {
-    const wrapper = mount(Card, {
-      props: { config }
-    })
+  let candidateStoreMock: any
 
-    expect(wrapper.find('[data-test-id="card"]').exists()).toBe(true)
-    expect(wrapper.find('span').text()).toBe('Test Card')
+  beforeEach(() => {
+    candidateStoreMock = {
+      getCandidates: [
+        { id: 1, statusId: 1, name: 'Candidate 1' },
+        { id: 2, statusId: 2, name: 'Candidate 2' }
+      ]
+    }
+    // Mock store implementation for each test
+    useCandidateStore.mockReturnValue(candidateStoreMock)
   })
 
-  it('displays the correct icon', () => {
-    const wrapper = mount(Card, {
+  it('renders correctly with props', () => {
+    const wrapper = shallowMount(CardComponent, {
       props: { config }
     })
+    const card = wrapper.find('[data-test-id="card"]')
+    expect(card.exists()).toBe(true)
+    expect(wrapper.exists()).toBe(true)
+    expect(wrapper.find('span').text()).toBe(config.name)
+    expect(wrapper.find('img').attributes('src')).toBe(
+      `src/interfaces/components/icons/icon-${config.order}.svg`
+    )
+  })
 
+  it('computes the correct class and icon based on the config order', () => {
+    const wrapper = mount(CardComponent, {
+      props: { config }
+    })
+    const hr = wrapper.find('hr')
+    expect(hr.classes()).toContain('card__1') // For order 1, it should have class `card__1`
     expect(wrapper.find('img').attributes('src')).toBe('src/interfaces/components/icons/icon-1.svg')
   })
 
-  it('shows candidate cards when hasCandidates is true', () => {
-    const wrapper = mount(Card, {
+  it('renders the CandidateCard component when candidates are present', () => {
+    const wrapper = mount(CardComponent, {
       props: { config }
     })
 
-    expect(wrapper.findAllComponents({ name: 'CandidateCard' })).toHaveLength(1) // Solo se muestra el candidato con statusId 1
+    const candidateCards = wrapper.findAllComponents(CandidateCard)
+    expect(candidateCards.length).toBe(1) // Only 1 candidate with statusId 1
+    expect(candidateCards[0].props('candidateData')).toEqual({
+      id: 1,
+      statusId: 1,
+      name: 'Candidate 1'
+    })
   })
 
-  it('does not show candidate cards when hasCandidates is empty', () => {
-    const wrapper = mount(Card, {
-      props: { config: { ...config, id: 3 } } // Cambiar el ID para que no coincida con ninguno de los candidatos
+  it('does not render CandidateCard component if there are no matching candidates', () => {
+    // Mock the store to return no matching candidates
+    candidateStoreMock.getCandidates = [{ id: 3, statusId: 3, name: 'Candidate 3' }]
+    const wrapper = mount(CardComponent, {
+      props: { config }
     })
 
-    expect(wrapper.findAllComponents({ name: 'CandidateCard' })).toHaveLength(0) // No debería haber candidatos
+    const candidateCards = wrapper.findAllComponents(CandidateCard)
+    expect(candidateCards.length).toBe(0) // No candidates with statusId 1
+  })
+
+  it('matches the snapshot', () => {
+    const wrapper = shallowMount(CardComponent, {
+      props: { config }
+    })
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

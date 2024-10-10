@@ -63,6 +63,7 @@
                         class="mt-3 inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-red-600 sm:mt-0 sm:w-auto"
                         @click="closeModal"
                         ref="cancelButtonRef"
+                        data-test-id="cancel-button"
                       >
                         Cancelar
                       </button>
