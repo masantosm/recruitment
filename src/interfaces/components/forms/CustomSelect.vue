@@ -1,6 +1,7 @@
 <template>
-  <div class="w-full relative">
+  <div class="w-full relative" data-test-id="custom-select">
     <div
+      data-test-id="select"
       class="flex justify-between flex-1 border border-border p-1 rounded-md"
       @click="toggleDropdown"
     >
@@ -9,9 +10,10 @@
     </div>
     <div v-if="isOpen" class="w-full absolute bg-white border border-border rounded-lg shadow-md">
       <div
+        :data-test-id="`option-${index}`"
         class="p-2 hover:bg-light-grey cursor-pointer z-10"
-        v-for="item in options"
-        :key="item.id"
+        v-for="(item,index) in options"
+        :key="index"
         @click="selectItem(item)"
       >
         {{ item.name }}
@@ -22,7 +24,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import type { Status } from '@/domain/models/Status'
+import type { Status } from '../../../domain/models/Status'
 
 export default defineComponent({
   name: 'CustomSelect',

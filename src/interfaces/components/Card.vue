@@ -43,7 +43,7 @@ export default defineComponent({
     const currentClass = computed<string>(() => `card__${props.config.order}`)
 
     const hasCandidates = computed<CandidateDTO[]>(() =>
-      candidateStore.getCandidates.filter((elem) => elem.statusId === props.config.id)
+      candidateStore.getCandidates.filter((elem: CandidateDTO) => elem.statusId === props.config.id)
     )
 
     return {
