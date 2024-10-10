@@ -21,7 +21,7 @@
 <script lang="ts">
 import { defineComponent, ref, computed } from 'vue'
 import { useCandidateStore } from '@/interfaces/stores/useCandidateStore'
-import buttonImg from '../components/icons/icon-button.svg'
+import buttonImg from '@/interfaces/components/icons/icon-button.svg'
 import type { Status } from '@/domain/models/Status'
 import type { CandidateDTO } from '@/application/dtos/CandidateDTO'
 
