@@ -32,7 +32,7 @@
 import { defineComponent, computed, ref } from 'vue'
 import CardOptions from '../components/CardOptions.vue'
 import ModalForm from '../components/ModalForm.vue'
-import buttonImg from '../components/icons/icon-button.svg'
+import buttonImg from './icons/icon-button.svg'
 import clock from '../components/icons/icon-clock.svg'
 import edit from '../components/icons/icon-edit.svg'
 import type { CandidateDTO } from '@/application/dtos/CandidateDTO'

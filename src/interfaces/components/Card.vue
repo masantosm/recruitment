@@ -1,5 +1,5 @@
 <template>
-  <div class="w-card min-h-card p-4 box-border rounded-xl border border-border mr-5">
+  <div class="w-card min-h-card p-4 box-border rounded-xl border border-border mr-5" data-test-id="card">
     <div class="w-candidate pb-5">
       <hr class="h-2 rounded-full border-0" :class="currentClass" />
       <div class="flex items-end mt-4">
