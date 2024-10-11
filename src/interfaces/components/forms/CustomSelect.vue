@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div class="w-full relative" data-test-id="custom-select">
     <div
       data-test-id="select"

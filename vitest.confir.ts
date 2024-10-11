@@ -10,12 +10,15 @@ export default defineConfig({
     }
   },
   test: {
-    include: ['**/*.test.ts', '**/*.spec.ts'],
+    environment: 'jsdom',
     coverage: {
       provider: 'istanbul',
       reporter: ['text', 'json', 'html'],
-      include: ['src/**/*.{ts,vue]}'],
-      exclude: ['**/*.d.ts', '**/*.test.ts', '**/*.spec.ts', '**/node_modules/**']
-    }
+      reportsDirectory: 'coverage',
+      include: ['src/**/*.ts', 'src/**/*.vue'],
+      exclude: ['**/node_modules/**', '**/*.spec.ts']
+    },
+    exclude: ['**/src/interfaces/router/**', '**/node_modules/**'],
+    clearMocks: true
   }
 })

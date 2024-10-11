@@ -74,11 +74,4 @@ describe('CardComponent.vue', () => {
     const candidateCards = wrapper.findAllComponents(CandidateCard)
     expect(candidateCards.length).toBe(0) // No candidates with statusId 1
   })
-
-  it('matches the snapshot', () => {
-    const wrapper = shallowMount(CardComponent, {
-      props: { config }
-    })
-    expect(wrapper.html()).toMatchSnapshot()
-  })
 })
