@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import CandidateCardComponent from '@/interfaces/components/CandidateCard.vue'
 
 describe('CandidateCardComponent component is definied', () => {
@@ -14,7 +14,8 @@ describe('CandidateCardComponent component is definied', () => {
   const wrapper = shallowMount(CandidateCardComponent, {
     global: {},
     props: {
-      candidateData
+      candidateData,
+      draggable: true
     }
   })
 
@@ -41,5 +42,14 @@ describe('CandidateCardComponent component is definied', () => {
     const modal = wrapper.findComponent({ name: 'ModalForm' })
     modal.vm.$emit('close-modal')
     expect(wrapper.vm.showModal).toBe(false)
+  })
+
+  it('check that the component receives the event dragstart', async () => {
+    const mockDragEvent = {
+      dataTransfer: { setData: vi.fn() },
+      preventDefault: vi.fn()
+    }
+    await wrapper.find('[data-test-id="candidate-card"]').trigger('dragstart', mockDragEvent)
+    expect(wrapper.emitted('dragstart')).toBeTruthy()
   })
 })

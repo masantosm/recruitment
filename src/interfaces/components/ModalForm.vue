@@ -11,18 +11,18 @@
         <CustomSelect
           data-test-id="select-status"
           :options="optionsList"
-          v-model="newCandidate.statusId"
+          v-model="currentCandidate.statusId"
         ></CustomSelect>
       </div>
       <CustomInput
         data-test-id="input-name"
         :label="'Nombre'"
-        v-model:modelValue="newCandidate.firstName"
+        v-model:modelValue="currentCandidate.firstName"
       ></CustomInput>
       <CustomInput
         data-test-id="input-last-name"
         :label="'Apellidos'"
-        v-model:modelValue="newCandidate.lastName"
+        v-model:modelValue="currentCandidate.lastName"
       ></CustomInput>
       <button
         data-test-id="x-button"
@@ -36,7 +36,7 @@
           data-test-id="modal-form-accept-button"
           :disabled="!completedForm"
           type="button"
-          class="px-4 py-2 ml-5  bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-blue-400 cursor-not-allowed"
+          class="px-4 py-2 ml-5  bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed"
           @click="handlerAcceptButton"
         >
           {{ buttonAcceptModal }}
@@ -82,7 +82,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const candidateStore = useCandidateStore()
 
-    const newCandidate = ref<CandidateDTO>(
+    const currentCandidate = ref<CandidateDTO>(
       props.candidate
         ? props.candidate
         : {
@@ -104,18 +104,18 @@ export default defineComponent({
     const buttonAcceptModal = computed<string>(() => (isEditCandidate.value ? 'Editar' : 'Alta'))
 
     const completedForm = computed<boolean>(() => {
-      return  newCandidate.value.firstName && newCandidate.value.lastName && newCandidate.value.statusId
+      return  currentCandidate.value.firstName && currentCandidate.value.lastName && currentCandidate.value.statusId
     })
 
     const createCandidate = () => {
-      candidateStore.createNewCandidate(newCandidate.value, candidateStore.getVacancyID)
+      candidateStore.createNewCandidate(currentCandidate.value, candidateStore.getVacancyID)
       emit('closeModal')
     }
 
     const updateCandidate = () => {
       candidateStore.updateCandidateStatus(
-        newCandidate.value.id,
-        newCandidate.value,
+        currentCandidate.value.id,
+        currentCandidate.value,
         vacancyId.value
       )
       emit('closeModal')
@@ -126,7 +126,7 @@ export default defineComponent({
     }
 
     const closeModal = () => {
-      newCandidate.value = {
+      currentCandidate.value = {
         firstName: '',
         lastName: '',
         vacancyId: '',
@@ -138,7 +138,7 @@ export default defineComponent({
     }
 
     return {
-      newCandidate,
+      currentCandidate,
       optionsList,
       completedForm,
       modalTitle,
