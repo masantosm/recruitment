@@ -11,7 +11,8 @@ describe('CandidateService', () => {
     lastName: 'test-lastname',
     vacancyId: 'test-vacancy-id',
     statusId: 'status-id',
-    candidateId: 'candidate-id'
+    candidateId: 'candidate-id',
+    updatedAt: 'update-at'
   }
 
   it('should fetch candidates by vacancyId', async () => {

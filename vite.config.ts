@@ -20,9 +20,9 @@ export default defineConfig({
       reporter: ['text', 'json', 'html'],
       reportsDirectory: 'coverage',
       include: ['src/**/*.ts', 'src/**/*.vue'],
-      exclude: ['**/node_modules/**', '**/*.spec.ts']
+      exclude: ['**/node_modules/**', '**/*.spec.ts', '**/App.vue', '**/main.ts']
     },
-    exclude: ['**/src/interfaces/router/**', '**/node_modules/**'],
+    exclude: ['**/src/interfaces/router/**', '**/node_modules/**', '**/App.vue', '**/main.ts'],
     clearMocks: true
   }
 })

@@ -7,7 +7,7 @@
         <span class="ml-2 text-base font-bold">{{ config.name }}</span>
       </div>
     </div>
-    <div v-if="hasCandidates">
+    <div v-if="hasCandidates.length">
       <CandidateCard
         v-for="(candidate, index) in hasCandidates"
         :key="index"

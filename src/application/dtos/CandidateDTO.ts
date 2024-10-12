@@ -4,4 +4,5 @@ export interface CandidateDTO {
   vacancyId: string
   statusId: string
   candidateId: string
+  updatedAt: string
 }

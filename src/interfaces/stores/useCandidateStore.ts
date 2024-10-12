@@ -5,19 +5,21 @@ import type { Status } from '../../domain/models/Status'
 
 interface CandidateState {
   candidates: CandidateDTO[]
-  candidateStatus: Status[]
+  vacancyStatus: Status[]
+  vacancyId: string
 }
 
 export const useCandidateStore = defineStore('candidate', {
   state: (): CandidateState => ({
     candidates: [],
-    candidateStatus: []
+    vacancyStatus: [],
+    vacancyId: '106ec090-e5a5-45af-b82f-a3b5eda4117c'
   }),
 
   actions: {
     async loadCandidateStatus(vacancyId: string) {
       const status = await CandidateService.fetchCandidateStatus(vacancyId)
-      this.candidateStatus = status.data
+      this.vacancyStatus = status.data
     },
     async loadCandidatesVacancy(vacancyId: string) {
       const status = await CandidateService.fetchCandidates(vacancyId)
@@ -35,13 +37,13 @@ export const useCandidateStore = defineStore('candidate', {
 
   getters: {
     getCandidateStatus: (state): Status[] => {
-      return state.candidateStatus
+      return state.vacancyStatus
     },
     getCandidates: (state): CandidateDTO[] => {
       return state.candidates
     },
-    getVacancyID: () => {
-      return '106ec090-e5a5-45af-b82f-a3b5eda4117c'
+    getVacancyID: (state) => {
+      return state.vacancyId
     }
   }
 })

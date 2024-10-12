@@ -19,7 +19,7 @@ describe('Candidate Store', () => {
 
   it('should initialize with an empty candidates array and status array', () => {
     expect(candidateStore.candidates).toEqual([])
-    expect(candidateStore.candidateStatus).toEqual([])
+    expect(candidateStore.vacancyStatus).toEqual([])
   })
 
   it('should load candidates for a vacancy', async () => {
@@ -29,7 +29,8 @@ describe('Candidate Store', () => {
         lastName: 'test-lastname',
         vacancyId: 'test-vacancy-id',
         statusId: 'status-id',
-        candidateId: 'candidate-id'
+        candidateId: 'candidate-id',
+        updatedAt: 'date'
       }
     ]
 
@@ -57,7 +58,7 @@ describe('Candidate Store', () => {
 
     await candidateStore.loadCandidateStatus('vacancyId')
 
-    expect(candidateStore.candidateStatus).toEqual(mockStatus)
+    expect(candidateStore.vacancyStatus).toEqual(mockStatus)
     expect(CandidateService.fetchCandidateStatus).toHaveBeenCalledWith('vacancyId')
   })
 
@@ -68,7 +69,8 @@ describe('Candidate Store', () => {
         lastName: 'test-lastname',
         vacancyId: 'test-vacancy-id',
         statusId: 'status-id',
-        candidateId: 'candidate-id'
+        candidateId: 'candidate-id',
+        updatedAt: 'date'
       }
     ]
 
@@ -86,7 +88,8 @@ describe('Candidate Store', () => {
       lastName: 'test-lastname',
       vacancyId: 'test-vacancy-id',
       statusId: 'status-id',
-      candidateId: 'candidate-id'
+      candidateId: 'candidate-id',
+      updatedAt: 'date'
     }
 
     const candidateId = '1'
@@ -105,7 +108,8 @@ describe('Candidate Store', () => {
       lastName: 'test-lastname',
       vacancyId: 'test-vacancy-id',
       statusId: 'status-id',
-      candidateId: 'candidate-id'
+      candidateId: 'candidate-id',
+      updatedAt: 'date'
     }
     const vacancyId = 'test-vacancy-id'
 
@@ -126,7 +130,8 @@ describe('Candidate Store', () => {
         lastName: 'test-lastname',
         vacancyId: 'test-vacancy-id',
         statusId: 'status-id',
-        candidateId: 'candidate-id'
+        candidateId: 'candidate-id',
+        updatedAt: 'date'
       }
     ]
     candidateStore.candidates = mockCandidates
@@ -146,7 +151,7 @@ describe('Candidate Store', () => {
       }
     ]
 
-    candidateStore.candidateStatus = mockStatus
+    candidateStore.vacancyStatus = mockStatus
     expect(candidateStore.getCandidateStatus).toEqual(mockStatus)
   })
 })
