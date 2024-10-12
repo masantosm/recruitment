@@ -1,13 +1,13 @@
 // src/__tests__/candidateStore.test.ts
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
-import { useCandidateStore } from '../../../../src/interfaces/stores/useCandidateStore'
-import CandidateService from '../../../../src/application/services/CandidateService'
-import type { CandidateDTO } from '../../../../src/application/dtos/CandidateDTO'
-import type { Status } from '../../../../src/domain/models/Status'
+import { useCandidateStore } from '@/interfaces/stores/useCandidateStore'
+import CandidateService from '@/application/services/CandidateService'
+import type { CandidateDTO } from '@/application/dtos/CandidateDTO'
+import type { Status } from '@/domain/models/Status'
 
 // Mock the CandidateService
-vi.mock('../../../../src/application/services/CandidateService')
+vi.mock('@/application/services/CandidateService')
 
 describe('Candidate Store', () => {
   let candidateStore: ReturnType<typeof useCandidateStore>

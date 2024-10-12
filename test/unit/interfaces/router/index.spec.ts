@@ -1,9 +1,9 @@
 // src/__tests__/router.test.ts
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import HomeView from '../../../../src/interfaces/views/HomeView.vue'
+import HomeView from '@/interfaces/views/HomeView.vue'
 import { shallowMount } from '@vue/test-utils'
 import { createApp } from 'vue'
-import router from '../../../../src/interfaces/router'
+import router from '@/interfaces/router'
 import { createPinia, Pinia } from 'pinia' // Importa createPinia
 
 vi.mock('@/views/HomeView.vue', () => ({

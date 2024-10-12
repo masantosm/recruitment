@@ -3,7 +3,7 @@
     <div class="w-candidate pb-5">
       <hr class="h-2 rounded-full border-0" :class="currentClass" />
       <div class="flex items-end mt-4">
-        <img :src="currentIcon" class="w-button h-button" />
+        <img :src="currentIcon" class="w-button h-button" data-test-id="card-img" />
         <span class="ml-2 text-base font-bold">{{ config.name }}</span>
       </div>
     </div>

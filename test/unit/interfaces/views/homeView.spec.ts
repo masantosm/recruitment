@@ -1,11 +1,11 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { mount } from '@vue/test-utils'
-import HomeView from '../../../../src/interfaces/views/HomeView.vue'
+import { shallowMount } from '@vue/test-utils'
+import HomeView from '@/interfaces/views/HomeView.vue'
 import { setActivePinia, createPinia } from 'pinia'
-import { useCandidateStore } from '../../../../src/interfaces/stores/useCandidateStore'
-import Card from '../../../../src/interfaces/components/Card.vue'
-import HeaderComponent from '../../../../src/interfaces/components/HeaderComponent.vue'
-import { Status } from '../../../../src/domain/models/Status'
+import { useCandidateStore } from '@/interfaces/stores/useCandidateStore'
+import Card from '@/interfaces/components/Card.vue'
+import HeaderComponent from '@/interfaces/components/HeaderComponent.vue'
+import { Status } from '@/domain/models/Status'
 
 describe('HomeView.vue', () => {
   let candidateStore: ReturnType<typeof useCandidateStore>
@@ -40,19 +40,19 @@ describe('HomeView.vue', () => {
     candidateStore.vacancyId = 'vacancy-123'
   })
 
-  it('should load candidate status on mounted', () => {
-    mount(HomeView)
+  it('should load candidate status on shallowMounted', () => {
+    shallowMount(HomeView)
     expect(candidateStore.loadCandidateStatus).toHaveBeenCalledWith('vacancy-123')
     expect(candidateStore.loadCandidatesVacancy).toHaveBeenCalledWith('vacancy-123')
   })
 
   it('should render HeaderComponent', () => {
-    const wrapper = mount(HomeView)
+    const wrapper = shallowMount(HomeView)
     expect(wrapper.findComponent(HeaderComponent).exists()).toBe(true)
   })
 
   it('should render Card components based on vacancyStatus', () => {
-    const wrapper = mount(HomeView)
+    const wrapper = shallowMount(HomeView)
 
     const cards = wrapper.findAllComponents(Card)
     expect(cards.length).toBe(candidateStore.getCandidateStatus.length)
@@ -62,7 +62,7 @@ describe('HomeView.vue', () => {
 
   it('should not render anything if vacancyStatus is empty', () => {
     candidateStore.vacancyStatus = []
-    const wrapper = mount(HomeView)
+    const wrapper = shallowMount(HomeView)
 
     const cards = wrapper.findAllComponents(Card)
     expect(cards.length).toBe(0)
