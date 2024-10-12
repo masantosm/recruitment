@@ -36,7 +36,8 @@ describe('ModalFormComponent component is definied', () => {
     vacancyId: 'vacancy-123',
     statusId: 'status-id',
     candidateId: '-',
-    updatedAt: '-'
+    updatedAt: '-',
+    id: '-'
   }
   beforeEach(() => {
     const pinia = createPinia()
@@ -135,14 +136,6 @@ describe('ModalFormComponent component is definied', () => {
   })
 
   it('when user click on "Edit" should update a candidate', async () => {
-    const mockCandidate: CandidateDTO = {
-      firstName: 'test-name',
-      lastName: 'test-lastname',
-      vacancyId: 'test-vacancy-id',
-      statusId: 'status-id',
-      candidateId: 'candidate-id',
-      updatedAt: 'date'
-    }
     const wrapper = shallowMount(ModalFormComponent, {
       props: {
         open: true,
@@ -154,11 +147,7 @@ describe('ModalFormComponent component is definied', () => {
     expect(modalFormAccept.text()).toStrictEqual('Editar')
     await modalFormAccept.trigger('click')
 
-    expect(mockUpdateCandidate).toHaveBeenCalledWith(
-      mockCandidate.candidateId,
-      mockCandidate,
-      'vacancy-123'
-    )
+    expect(mockUpdateCandidate).toHaveBeenCalledWith(mockCandidate.id, mockCandidate, 'vacancy-123')
     expect(wrapper.emitted()).toHaveProperty('closeModal')
   })
 

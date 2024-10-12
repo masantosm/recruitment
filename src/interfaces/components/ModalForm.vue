@@ -34,7 +34,7 @@
       <div class="py-6 sm:flex sm:flex-row-reverse">
         <button
           data-test-id="modal-form-accept-button"
-          :disabled="!noValidForm"
+          :disabled="!completedForm"
           type="button"
           class="px-4 py-2 ml-5  bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-blue-400 cursor-not-allowed"
           @click="handlerAcceptButton"
@@ -91,7 +91,8 @@ export default defineComponent({
             vacancyId: candidateStore.getVacancyID,
             statusId: '',
             candidateId: '-',
-            updatedAt: '-'
+            updatedAt: '-',
+            id: '-'
           }
     )
     const isEditCandidate = computed<boolean>(() => !!props.candidate)
@@ -102,10 +103,8 @@ export default defineComponent({
     )
     const buttonAcceptModal = computed<string>(() => (isEditCandidate.value ? 'Editar' : 'Alta'))
 
-    const noValidForm = computed<boolean>(() => {
-      return Object.values(newCandidate.value).every((value) => {
-        return value !== undefined && value !== null && value !== ''
-      })
+    const completedForm = computed<boolean>(() => {
+      return  newCandidate.value.firstName && newCandidate.value.lastName && newCandidate.value.statusId
     })
 
     const createCandidate = () => {
@@ -115,7 +114,7 @@ export default defineComponent({
 
     const updateCandidate = () => {
       candidateStore.updateCandidateStatus(
-        newCandidate.value.candidateId,
+        newCandidate.value.id,
         newCandidate.value,
         vacancyId.value
       )
@@ -141,7 +140,7 @@ export default defineComponent({
     return {
       newCandidate,
       optionsList,
-      noValidForm,
+      completedForm,
       modalTitle,
       buttonAcceptModal,
       createCandidate,

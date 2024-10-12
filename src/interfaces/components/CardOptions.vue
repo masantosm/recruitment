@@ -40,8 +40,8 @@ export default defineComponent({
 
     const currentData = computed(() => props.userData)
     const currentStatus = computed<string>(() => currentData.value.statusId)
-    const currentVacancy = computed<string>(() => currentData.value.vacancyId)
-    const currentUserDataId = computed<string>(() => currentData.value.candidateId)
+    const currentVacancy = computed<string>(() => candidateStore.getVacancyID)
+    const currentUserDataId = computed<string>(() => currentData.value.id)
     const optionsStatusList = computed<Status[]>(() =>
       candidateStore.getCandidateStatus.filter((elem) => elem.id !== currentStatus.value)
     )
