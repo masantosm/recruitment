@@ -8,7 +8,7 @@ vi.mock('@/infrastructure/http/CandidateRepository')
 describe('CandidateService', () => {
   const mockCandidate: CandidateDTO = {
     firstName: 'test-name',
-    lastName: 'test-lastname',
+    lastName: 'test-last-name',
     vacancyId: 'test-vacancy-id',
     statusId: 'status-id',
     candidateId: 'candidate-id',

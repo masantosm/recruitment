@@ -1,7 +1,9 @@
 <template>
   <div
-    class="w-candidate h-candidate flex flex-col justify-between bg-light-grey border border-border rounded-xl p-2 box-border mb-4"
+    class="w-candidate h-candidate flex flex-col justify-between bg-light-grey border border-border rounded-xl p-2 box-border mb-4 cursor-move shadow-lg"
     data-test-id="candidate-card"
+    :draggable="draggable"
+    @dragstart="handleDragStart"
   >
     <div class="flex items-stretch">
       <p class="w-10/12 font-bold truncate text-normal" data-test-id="candidate-card-name">{{ userName }}</p>
@@ -44,13 +46,18 @@ export default defineComponent({
     candidateData: {
       type: Object as () => CandidateDTO ,
       required: true
-    }
+    },
+    draggable: {
+      type: Boolean,
+      default: false,
+    },
   },
   components: {
     CardOptions,
     ModalForm
   },
-  setup(props) {
+  emits: ['dragstart', 'dragover', 'drop'],
+  setup(props, {emit}) {
     const showModal = ref<boolean>(false)
 
     const userName = computed<string>(
@@ -64,7 +71,8 @@ export default defineComponent({
         statusId: props.candidateData.statusId,
         vacancyId: props.candidateData.vacancyId,
         candidateId: props.candidateData.candidateId,
-        updatedAt: props.candidateData.updatedAt
+        updatedAt: props.candidateData.updatedAt,
+        id: props.candidateData.id
       }
     })
 
@@ -80,6 +88,11 @@ export default defineComponent({
       showModal.value = value
     }
 
+    const handleDragStart = (event: DragEvent) => {
+      emit('dragstart', event);
+    };
+
+
     return {
       buttonImg,
       clock,
@@ -88,7 +101,8 @@ export default defineComponent({
       userName,
       showModal,
       currentUser,
-      setShowModal
+      setShowModal,
+      handleDragStart
     }
   }
 })

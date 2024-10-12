@@ -43,7 +43,7 @@ export default defineComponent({
     const currentVacancy = computed<string>(() => candidateStore.getVacancyID)
     const currentUserDataId = computed<string>(() => currentData.value.id)
     const optionsStatusList = computed<Status[]>(() =>
-      candidateStore.getCandidateStatus.filter((elem) => elem.id !== currentStatus.value)
+      candidateStore.getCandidateStatus.filter((elem: Status) => elem.id !== currentStatus.value)
     )
 
     const toggleDropdown = () => {

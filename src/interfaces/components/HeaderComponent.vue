@@ -30,7 +30,7 @@
       <button
         data-test-id="header-component-add-button"
         type="button"
-        class="w-auto h-auto bg-dark-blue text-white rounded-xl text-x-small text-center font-semibold p-2"
+        class="w-auto h-auto px-4 py-2 ml-5 text-white rounded-xl bg-dark-blue"
         @click="setShowModal(true)"
       >
         Añadir candidato
