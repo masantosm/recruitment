@@ -7,6 +7,7 @@ import { Status } from '@/domain/models/Status'
 
 describe('CardOptions.vue', () => {
   let wrapper: any
+  const mockVacancyId = 'vacancy-123'
   const mockUpdateCandidateStatus = vi.fn()
   const mockGetCandidateStatus: Status[] = [
     {
@@ -36,10 +37,12 @@ describe('CardOptions.vue', () => {
     const candidateStore = useCandidateStore()
     candidateStore.updateCandidateStatus = mockUpdateCandidateStatus
     candidateStore.vacancyStatus = mockGetCandidateStatus
+    candidateStore.vacancyId = mockVacancyId
 
     wrapper = shallowMount(CardOptions, {
       props: {
         userData: {
+          id: 'test-id',
           firstName: 'test-name',
           lastName: 'test-lastname',
           vacancyId: 'test-vacancy-id',
@@ -69,7 +72,7 @@ describe('CardOptions.vue', () => {
     await statusButton.trigger('click')
 
     expect(mockUpdateCandidateStatus).toHaveBeenCalledWith(
-      'candidate-id',
+      'test-id',
       {
         firstName: 'test-name',
         lastName: 'test-lastname',
@@ -78,7 +81,7 @@ describe('CardOptions.vue', () => {
         candidateId: 'candidate-id',
         updatedAt: 'update-at'
       },
-      'test-vacancy-id'
+      'vacancy-123'
     )
     expect(wrapper.vm.isOpen).toBe(false)
   })
