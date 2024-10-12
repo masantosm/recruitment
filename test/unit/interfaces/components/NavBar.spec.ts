@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
 import { describe, it, expect } from 'vitest'
-import NavBar from '../../../../src/interfaces/components/NavBar.vue'
+import NavBar from '@/interfaces/components/NavBar.vue'
 
 describe('HeaderComponent component is definied', () => {
   const wrapper = shallowMount(NavBar, {

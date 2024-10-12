@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
 import { describe, it, expect } from 'vitest'
-import HeaderComponent from '../../../../src/interfaces/components/HeaderComponent.vue'
+import HeaderComponent from '@/interfaces/components/HeaderComponent.vue'
 
 describe('HeaderComponent component is definied', () => {
   const wrapper = shallowMount(HeaderComponent, {

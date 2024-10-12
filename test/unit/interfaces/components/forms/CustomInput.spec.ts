@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
 import { describe, it, expect } from 'vitest'
-import CustomSelect from '../../../../../src/interfaces/components/forms/CustomInput.vue'
+import CustomSelect from '@/interfaces/components/forms/CustomInput.vue'
 
 describe('CustomInput component is definied', () => {
   it('renders correctly with the given props', () => {

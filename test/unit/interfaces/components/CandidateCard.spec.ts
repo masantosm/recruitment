@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
 import { describe, it, expect } from 'vitest'
-import CandidateCardComponent from '../../../../src/interfaces/components/CandidateCard.vue'
+import CandidateCardComponent from '@/interfaces/components/CandidateCard.vue'
 
 describe('CandidateCardComponent component is definied', () => {
   const candidateData: object = {

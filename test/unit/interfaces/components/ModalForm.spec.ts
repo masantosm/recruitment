@@ -1,12 +1,10 @@
-import { mount } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import ModalFormComponent from '../../../../src/interfaces/components/ModalForm.vue'
+import ModalFormComponent from '@/interfaces/components/ModalForm.vue'
 import { createPinia, setActivePinia } from 'pinia'
-import { useCandidateStore } from '../../../../src/interfaces/stores/useCandidateStore'
-import { Status } from '../../../../src/domain/models/Status'
-import { CandidateDTO } from '../../../../src/application/dtos/CandidateDTO'
-import CustomSelect from '../../../../src/interfaces/components/forms/CustomSelect.vue'
-import CustomImput from '../../../../src/interfaces/components/forms/CustomInput.vue'
+import { useCandidateStore } from '@/interfaces/stores/useCandidateStore'
+import { Status } from '@/domain/models/Status'
+import { CandidateDTO } from '@/application/dtos/CandidateDTO'
 
 describe('ModalFormComponent component is definied', () => {
   const mockUpdateCandidate = vi.fn()
@@ -52,7 +50,7 @@ describe('ModalFormComponent component is definied', () => {
   })
 
   it('should render modal with title "Alta de Candidato"', () => {
-    const wrapper = mount(ModalFormComponent, {
+    const wrapper = shallowMount(ModalFormComponent, {
       props: {
         open: true,
         candidate: null
@@ -76,7 +74,7 @@ describe('ModalFormComponent component is definied', () => {
   })
 
   it('should render modal with title "Editar Candidato"', () => {
-    const wrapper = mount(ModalFormComponent, {
+    const wrapper = shallowMount(ModalFormComponent, {
       props: {
         open: true,
         candidate: mockCandidate
@@ -100,7 +98,7 @@ describe('ModalFormComponent component is definied', () => {
   })
 
   it('should no render modal when open props is false', () => {
-    const wrapper = mount(ModalFormComponent, {
+    const wrapper = shallowMount(ModalFormComponent, {
       props: {
         open: false
       }
@@ -111,20 +109,20 @@ describe('ModalFormComponent component is definied', () => {
   })
 
   it('when user click on "Alta" should create a new candidate', async () => {
-    const wrapper = mount(ModalFormComponent, {
+    const wrapper = shallowMount(ModalFormComponent, {
       props: {
         open: true
       }
     })
-    const selectComponent = wrapper.findComponent(CustomSelect)
+    const selectComponent = wrapper.findComponent({ name: 'CustomSelect' })
     expect(selectComponent.exists()).toBeTruthy()
     await selectComponent.vm.$emit('update:modelValue', mockCandidate.statusId)
 
-    const inputNameComponent = wrapper.findAllComponents(CustomImput)
+    const inputNameComponent = wrapper.findAllComponents({ name: 'CustomInput' })
     expect(inputNameComponent[0].exists()).toBeTruthy()
     await inputNameComponent[0].vm.$emit('update:modelValue', mockCandidate.firstName)
 
-    const inputLastNameComponent = wrapper.findAllComponents(CustomImput)
+    const inputLastNameComponent = wrapper.findAllComponents({ name: 'CustomInput' })
     expect(inputLastNameComponent[1].exists()).toBeTruthy()
     await inputLastNameComponent[1].vm.$emit('update:modelValue', mockCandidate.lastName)
 
@@ -145,7 +143,7 @@ describe('ModalFormComponent component is definied', () => {
       candidateId: 'candidate-id',
       updatedAt: 'date'
     }
-    const wrapper = mount(ModalFormComponent, {
+    const wrapper = shallowMount(ModalFormComponent, {
       props: {
         open: true,
         candidate: mockCandidate
@@ -165,7 +163,7 @@ describe('ModalFormComponent component is definied', () => {
   })
 
   it('when user click on "Cancel" should emit "close-modal', async () => {
-    const wrapper = mount(ModalFormComponent, {
+    const wrapper = shallowMount(ModalFormComponent, {
       props: {
         open: true
       }
@@ -178,7 +176,7 @@ describe('ModalFormComponent component is definied', () => {
   })
 
   it('when user click on "X" should emit "close-modal', async () => {
-    const wrapper = mount(ModalFormComponent, {
+    const wrapper = shallowMount(ModalFormComponent, {
       props: {
         open: true
       }

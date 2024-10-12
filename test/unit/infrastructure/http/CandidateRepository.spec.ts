@@ -1,12 +1,30 @@
 import { describe, it, expect, beforeAll, afterEach } from 'vitest'
-import axiosInstance from '../../../../src/plugins/axios'
-import CandidateRepository from '../../../../src/infrastructure/http/CandidateRepository'
+import axiosInstance from '@/plugins/axios'
+import CandidateRepository from '@/infrastructure/http/CandidateRepository'
 import axiosMockAdapter from 'axios-mock-adapter'
-import type { CandidateDTO } from '../../../../src/application/dtos/CandidateDTO'
+import type { CandidateDTO } from '@/application/dtos/CandidateDTO'
 
 describe('CandidateRepository', () => {
   let mock: axiosMockAdapter
+  const candidateData: CandidateDTO = {
+    firstName: 'test-name',
+    lastName: 'test-lastname',
+    vacancyId: 'test-vacancy-id',
+    statusId: 'status-id',
+    candidateId: 'candidate-id',
+    updatedAt: 'update-at'
+  }
 
+  const mockCandidates: CandidateDTO[] = [
+    {
+      firstName: 'test-name',
+      lastName: 'test-lastname',
+      vacancyId: 'test-vacancy-id',
+      statusId: 'status-id',
+      candidateId: 'candidate-id',
+      updatedAt: 'update-at'
+    }
+  ]
   beforeAll(() => {
     mock = new axiosMockAdapter(axiosInstance)
   })
@@ -29,15 +47,6 @@ describe('CandidateRepository', () => {
 
   it('should fetch vacancy candidates', async () => {
     const vacancyId = 'vacancy-1'
-    const mockCandidates: CandidateDTO[] = [
-      {
-        firstName: 'test-name',
-        lastName: 'test-lastname',
-        vacancyId: 'test-vacancy-id',
-        statusId: 'status-id',
-        candidateId: 'candidate-id'
-      }
-    ]
 
     mock.onGet(`/vacancies/${vacancyId}/candidates`).reply(200, mockCandidates)
 
@@ -48,14 +57,6 @@ describe('CandidateRepository', () => {
   })
 
   it('should add a new candidate', async () => {
-    const candidateData: CandidateDTO = {
-      firstName: 'test-name',
-      lastName: 'test-lastname',
-      vacancyId: 'test-vacancy-id',
-      statusId: 'status-id',
-      candidateId: 'candidate-id'
-    }
-
     mock.onPost('/candidates').reply(201, candidateData)
 
     const response = await CandidateRepository.addCandidate(candidateData)
@@ -66,13 +67,6 @@ describe('CandidateRepository', () => {
 
   it('should update a candidate', async () => {
     const candidateId = '1'
-    const candidateData: CandidateDTO = {
-      firstName: 'test-name',
-      lastName: 'test-lastname',
-      vacancyId: 'test-vacancy-id',
-      statusId: 'status-id',
-      candidateId: 'candidate-id'
-    }
 
     mock.onPut(`/candidates/${candidateId}`).reply(200, candidateData)
 

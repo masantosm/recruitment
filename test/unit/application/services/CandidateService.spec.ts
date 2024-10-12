@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
-import CandidateService from '../../../../src/application/services/CandidateService'
-import CandidateRepository from '../../../../src/infrastructure/http/CandidateRepository'
-import type { CandidateDTO } from '../../../../src/application/dtos/CandidateDTO'
+import CandidateService from '@/application/services/CandidateService'
+import CandidateRepository from '@/infrastructure/http/CandidateRepository'
+import type { CandidateDTO } from '@/src/application/dtos/CandidateDTO'
 
 vi.mock('@/infrastructure/http/CandidateRepository')
 

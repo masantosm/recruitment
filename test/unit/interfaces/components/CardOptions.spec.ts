@@ -1,9 +1,9 @@
 import { shallowMount } from '@vue/test-utils'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import CardOptions from '../../../../src/interfaces/components/CardOptions.vue'
-import { useCandidateStore } from '../../../../src/interfaces/stores/useCandidateStore'
+import CardOptions from '@/interfaces/components/CardOptions.vue'
+import { useCandidateStore } from '@/interfaces/stores/useCandidateStore'
 import { createPinia, setActivePinia } from 'pinia'
-import { Status } from '../../../../src/domain/models/Status'
+import { Status } from '@/domain/models/Status'
 
 describe('CardOptions.vue', () => {
   let wrapper: any
