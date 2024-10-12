@@ -4,7 +4,7 @@
     data-test-id="candidate-card"
   >
     <div class="flex items-stretch">
-      <p class="w-10/12 font-bold truncate text-normal">{{ userName }}</p>
+      <p class="w-10/12 font-bold truncate text-normal" data-test-id="candidate-card-name">{{ userName }}</p>
       <div class="w-2/12 flex justify-end text-normal reñative">
         <CardOptions :user-data="candidateData"></CardOptions>
       </div>
@@ -13,10 +13,10 @@
     <div class="flex justify-between">
       <div class="flex items-center">
         <img class="mr-1" :src="clock" />
-        <span class="text-grey text-x-small">{{ formatDate }}</span>
+        <span class="text-grey text-x-small" data-test-id="candidate-card-date">{{ formatDate }}</span>
       </div>
       <div class="mr-1 cursor-pointer">
-        <button @click="setShowModal(true)">
+        <button @click="setShowModal(true)" data-test-id="candidate-card-edit">
           <img :src="edit" />
         </button>
       </div>
@@ -42,7 +42,7 @@ export default defineComponent({
   name: 'Candidate-card',
   props: {
     candidateData: {
-      type: Object,
+      type: Object as () => CandidateDTO ,
       required: true
     }
   },
@@ -63,7 +63,8 @@ export default defineComponent({
         lastName: props.candidateData.lastName,
         statusId: props.candidateData.statusId,
         vacancyId: props.candidateData.vacancyId,
-        candidateId: props.candidateData.id
+        candidateId: props.candidateData.candidateId,
+        updatedAt: props.candidateData.updatedAt
       }
     })
 

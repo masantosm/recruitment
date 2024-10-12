@@ -1,5 +1,5 @@
 <template>
-  <header class="p-8 pb-0 bg-white rounded-t-3xl">
+  <header class="p-8 pb-0 bg-white rounded-t-3xl" data-test-id="header-component">
     <div class="flex items-center border-b border-border">
       <a
         rel="noopener noreferrer"
@@ -28,6 +28,7 @@
         />
       </div>
       <button
+        data-test-id="header-component-add-button"
         type="button"
         class="w-auto h-auto bg-dark-blue text-white rounded-xl text-x-small text-center font-semibold p-2"
         @click="setShowModal(true)"

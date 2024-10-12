@@ -5,7 +5,7 @@ import CustomSelect from '../../../../../src/interfaces/components/forms/CustomS
 describe('CustomSelect component is definied', () => {
   const options = [
     {
-      id: '1',
+      id: 'id-test-1',
       name: 'test1',
       order: '1',
       companyId: 'companyId',
@@ -21,17 +21,22 @@ describe('CustomSelect component is definied', () => {
       modelValue: '1'
     }
   })
-  it('renders correctly with the given props', () => {
-    const inputComponent = wrapper.find('[data-test-id="custom-select"]')
-    expect(inputComponent.exists()).toBeTruthy()
+  it('renders correctly with the given props', async () => {
     const select = wrapper.find('[data-test-id="select"]')
-    select.trigger('click')
+    await select.trigger('click')
     expect(wrapper.vm.isOpen).toBeTruthy()
-    // wrapper.vm.isOpen = true
-    // const option = wrapper.find('[data-test-id="option-0"]')
-    // expect(option.exists()).toBeTruthy()
-    // option.trigger('click')
-    // expect(wrapper.emitted('update:modelValue')).toBeTruthy()
+
+    const option = wrapper.find('[data-test-id="option-0"]')
+    expect(option.exists()).toBeTruthy()
+
+    await option.trigger('click')
+    expect(wrapper.vm.isOpen).toBeFalsy()
+
+    const emittedEvent = wrapper.emitted('update:modelValue')
+    expect(emittedEvent).toBeTruthy()
+    if (emittedEvent) {
+      expect(emittedEvent[0][0]).toBe('id-test-1')
+    }
   })
 
   it('check that const selectedItem has value', () => {
@@ -50,15 +55,17 @@ describe('CustomSelect component is definied', () => {
   })
 
   it('check that func toggleDropdown works correctly', () => {
-    expect(wrapper.vm.isOpen).toBeTruthy()
     wrapper.vm.toggleDropdown()
-    expect(wrapper.vm.isOpen).toBeFalsy()
+    expect(wrapper.vm.isOpen).toBeTruthy()
   })
 
-  it('check that func selectItem works correctly and emit event', () => {
-    wrapper.vm.selectItem(options[0])
-    expect(wrapper.emitted('update:modelValue')).toBeTruthy()
-    expect(wrapper.emitted('update:modelValue')?.length).toBe(1)
-    expect(wrapper.emitted('update:modelValue')[0][0]).toStrictEqual('1')
+  it('check selectedItem should be null if modelValue does not match any option', () => {
+    const wrapper = shallowMount(CustomSelect, {
+      props: {
+        options,
+        modelValue: 'null-id'
+      }
+    })
+    expect(wrapper.vm.selectedItem).toBeNull()
   })
 })

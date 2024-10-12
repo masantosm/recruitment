@@ -1,11 +1,11 @@
 <template>
   <main>
-    <div v-if="candidateStatus" class="pl-10 flex">
+    <div v-if="vacancyStatus.length" class="pl-10 flex">
       <div class="pt-2 rounded-xl w-10/12">
         <h1 class="font-bold text-3xl pb-5">Reclutamiento</h1>
         <HeaderComponent></HeaderComponent>
         <div class="flex flex-row content-between bg-white p-8 rounded-b-3xl overflow-x-auto">
-          <Card v-for="card in candidateStatus" :key="card.id" :config="card"></Card>
+          <Card v-for="card in vacancyStatus" :key="card.id" :config="card"></Card>
         </div>
       </div>
     </div>
@@ -32,9 +32,9 @@ export default defineComponent({
       candidateStore.loadCandidatesVacancy(vacancyId.value)
     })
 
-    const candidateStatus = computed(() => candidateStore.getCandidateStatus)
+    const vacancyStatus = computed(() => candidateStore.getCandidateStatus)
     return {
-      candidateStatus,
+      vacancyStatus,
       showModal
     }
   }

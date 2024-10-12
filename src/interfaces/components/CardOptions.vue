@@ -1,18 +1,19 @@
 <template>
-  <div class="relative inline-block">
-    <button @click="toggleDropdown" class="cursor-pointer">
+  <div class="relative inline-block" data-test-id="card-options">
+    <button @click="toggleDropdown" class="cursor-pointer" data-test-id="card-options-button">
       <img :src="buttonImg" aria-hidden="true" />
     </button>
     <ul
       v-if="isOpen"
       class="w-[225px] bg-white absolute right-0 top-full rounded-xl shadow-md z-20"
+      data-test-id="card-options-list"
     >
       <li
         v-for="item in optionsStatusList"
         :key="item.name"
         class="py-3 px-10 text-small font-normal border-b border-border last:border-0"
       >
-        <button @click="changeStatus(item.id)">{{ `Mover a ${item.name}` }}</button>
+        <button @click="changeStatus(item.id)" :data-test-id="`card-options-button-${item.name}`">{{ `Mover a ${item.name}` }}</button>
       </li>
     </ul>
   </div>
@@ -40,7 +41,7 @@ export default defineComponent({
     const currentData = computed(() => props.userData)
     const currentStatus = computed<string>(() => currentData.value.statusId)
     const currentVacancy = computed<string>(() => currentData.value.vacancyId)
-    const currentUserDataId = computed<string>(() => currentData.value.id)
+    const currentUserDataId = computed<string>(() => currentData.value.candidateId)
     const optionsStatusList = computed<Status[]>(() =>
       candidateStore.getCandidateStatus.filter((elem) => elem.id !== currentStatus.value)
     )
@@ -55,7 +56,8 @@ export default defineComponent({
         lastName: props.userData.lastName,
         vacancyId: props.userData.vacancyId,
         statusId: statusId,
-        candidateId: props.userData.candidateId
+        candidateId: props.userData.candidateId,
+        updatedAt: props.userData.updatedAt
       }
 
       candidateStore.updateCandidateStatus(

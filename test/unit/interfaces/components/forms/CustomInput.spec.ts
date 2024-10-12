@@ -18,6 +18,10 @@ describe('CustomInput component is definied', () => {
     const input = wrapper.find('[data-test-id=input]')
     expect(input.attributes('value')).toBe('Test')
     input.trigger('input')
-    expect(wrapper.emitted('update:modelValue')).toBeTruthy()
+    const emittedEvent = wrapper.emitted('update:modelValue')
+    expect(emittedEvent).toBeTruthy()
+    if (emittedEvent) {
+      expect(emittedEvent[0][0]).toBe('Test')
+    }
   })
 })
