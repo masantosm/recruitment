@@ -1,10 +1,10 @@
-<template> 
+<template>
   <div
-    class="w-card min-w-card min-h-card p-4 box-border rounded-xl border border-border mr-5 "
+    class="w-card min-w-card min-h-card p-4 box-border rounded-xl border border-border mr-5"
     data-test-id="card"
-    @dragover="allowDrop" 
-    @drop="dropCandidate" 
-    > 
+    @dragover="allowDrop"
+    @drop="dropCandidate"
+  >
     <div class="w-full pb-5">
       <hr class="w-full h-2 rounded-full border-0" :class="currentClass" />
       <div class="flex items-end mt-4">
@@ -44,7 +44,7 @@ export default defineComponent({
   setup(props) {
     const candidateStore = useCandidateStore()
 
-    const draggedCandidate  = ref<CandidateDTO | null>(null)
+    const draggedCandidate = ref<CandidateDTO | null>(null)
     const currentVacancy = computed<string>(() => candidateStore.getVacancyID)
     const currentIcon = computed<string>(
       () => `src/interfaces/components/icons/icon-${props.config.order}.svg`
@@ -54,32 +54,31 @@ export default defineComponent({
     const hasCandidates = computed<CandidateDTO[]>(() =>
       candidateStore.getCandidates.filter((elem: CandidateDTO) => elem.statusId === props.config.id)
     )
-    
-    const dragStart =(candidate: CandidateDTO, event: DragEvent) => {
-      draggedCandidate.value = candidate;
+
+    const dragStart = (candidate: CandidateDTO, event: DragEvent) => {
+      draggedCandidate.value = candidate
       const candidateData = JSON.stringify(candidate)
-      event.dataTransfer?.setData('candidate',candidateData);
+      event.dataTransfer?.setData('candidate', candidateData)
     }
 
-
     const allowDrop = (event: DragEvent) => {
-      event.preventDefault();
-    };
+      event.preventDefault()
+    }
 
     const dropCandidate = (event: DragEvent) => {
-      event.preventDefault();
+      event.preventDefault()
       const candidate = event.dataTransfer?.getData('candidate')
       if (candidate) {
         let currentCandidate = JSON.parse(candidate)
 
         const currentUserData: CandidateDTO = {
-            firstName: currentCandidate.firstName,
-            lastName: currentCandidate.lastName,
-            vacancyId: currentCandidate.vacancyId,
-            statusId: props.config.id,
-            candidateId: currentCandidate.candidateId,
-            updatedAt: currentCandidate.updatedAt
-          }
+          firstName: currentCandidate.firstName,
+          lastName: currentCandidate.lastName,
+          vacancyId: currentCandidate.vacancyId,
+          statusId: props.config.id,
+          candidateId: currentCandidate.candidateId,
+          updatedAt: currentCandidate.updatedAt
+        }
 
         candidateStore.updateCandidateStatus(
           currentCandidate.id,
@@ -87,7 +86,7 @@ export default defineComponent({
           currentVacancy.value
         )
       }
-    };
+    }
 
     return {
       currentIcon,

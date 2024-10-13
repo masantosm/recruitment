@@ -7,20 +7,41 @@
       Slot logo
     </div>
     <div class="pt-5">
-      <div v-for="(firstMenu, index) in displayOptions" :key="index" :data-test-id="`nav-var-menu-${index}`">
-        <div class="flex justify-between cursor-pointer font-bolder" @click="toggleAdmin" :data-test-id="`nav-var-menu-${index}-container`">
-          <span class="text-grey" :data-test-id="`nav-var-menu-${index}-title`">{{ firstMenu.title }}</span>
+      <div
+        v-for="(firstMenu, index) in displayOptions"
+        :key="index"
+        :data-test-id="`nav-var-menu-${index}`"
+      >
+        <div
+          class="flex justify-between cursor-pointer font-bolder"
+          @click="toggleAdmin"
+          :data-test-id="`nav-var-menu-${index}-container`"
+        >
+          <span class="text-grey" :data-test-id="`nav-var-menu-${index}-title`">{{
+            firstMenu.title
+          }}</span>
           <span class="text-grey" :class="{ open: isFirstMenuOpen }">⌄</span>
         </div>
         <div
           v-if="isFirstMenuOpen"
           class="flex justify-between content-center p-2 bg-light-grey rounded-xl"
         >
-          <div v-for="(secondMenu, index) in firstMenu.secondMenu" :key="index" class="w-full" :data-test-id="`nav-var-submenu-${index}`">
-            <div class="flex justify-between p-2 cursor-pointer" @click="toggleTalento" :data-test-id="`nav-var-submenu-${index}-container`">
+          <div
+            v-for="(secondMenu, index) in firstMenu.secondMenu"
+            :key="index"
+            class="w-full"
+            :data-test-id="`nav-var-submenu-${index}`"
+          >
+            <div
+              class="flex justify-between p-2 cursor-pointer"
+              @click="toggleTalento"
+              :data-test-id="`nav-var-submenu-${index}-container`"
+            >
               <div class="flex">
                 <img src="../components/icons/icon-star.svg" />
-                <span class="text-violet" :data-test-id="`nav-var-submenu-${index}-title`">{{ secondMenu.title }}</span>
+                <span class="text-violet" :data-test-id="`nav-var-submenu-${index}-title`">{{
+                  secondMenu.title
+                }}</span>
               </div>
               <span class="text-violet" :class="{ open: isSecondMenuOpen }">⌄</span>
             </div>
@@ -28,7 +49,11 @@
               <ul
                 class="flex items-center pl-2 text-violet border-l-4 border-violet h-10 font-semibold p-2"
               >
-                <li v-for="(option, index) in secondMenu.options" :key="index" :data-test-id="`nav-var-submenu-${index}-title`">
+                <li
+                  v-for="(option, index) in secondMenu.options"
+                  :key="index"
+                  :data-test-id="`nav-var-submenu-${index}-title`"
+                >
                   {{ option.title }}
                 </li>
               </ul>

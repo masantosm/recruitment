@@ -36,7 +36,7 @@
           data-test-id="modal-form-accept-button"
           :disabled="!completedForm"
           type="button"
-          class="px-4 py-2 ml-5  bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed"
+          class="px-4 py-2 ml-5 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed"
           @click="handlerAcceptButton"
         >
           {{ buttonAcceptModal }}
@@ -104,7 +104,11 @@ export default defineComponent({
     const buttonAcceptModal = computed<string>(() => (isEditCandidate.value ? 'Editar' : 'Alta'))
 
     const completedForm = computed<boolean>(() => {
-      return  currentCandidate.value.firstName && currentCandidate.value.lastName && currentCandidate.value.statusId
+      return (
+        currentCandidate.value.firstName &&
+        currentCandidate.value.lastName &&
+        currentCandidate.value.statusId
+      )
     })
 
     const createCandidate = () => {

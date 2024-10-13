@@ -13,7 +13,9 @@
         :key="item.name"
         class="py-3 px-10 text-small font-normal border-b border-border last:border-0"
       >
-        <button @click="changeStatus(item.id)" :data-test-id="`card-options-button-${item.name}`">{{ `Mover a ${item.name}` }}</button>
+        <button @click="changeStatus(item.id)" :data-test-id="`card-options-button-${item.name}`">
+          {{ `Mover a ${item.name}` }}
+        </button>
       </li>
     </ul>
   </div>

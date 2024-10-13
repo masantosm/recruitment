@@ -6,7 +6,9 @@
     @dragstart="handleDragStart"
   >
     <div class="flex items-stretch">
-      <p class="w-10/12 font-bold truncate text-normal" data-test-id="candidate-card-name">{{ userName }}</p>
+      <p class="w-10/12 font-bold truncate text-normal" data-test-id="candidate-card-name">
+        {{ userName }}
+      </p>
       <div class="w-2/12 flex justify-end text-normal reñative">
         <CardOptions :user-data="candidateData"></CardOptions>
       </div>
@@ -15,7 +17,9 @@
     <div class="flex justify-between">
       <div class="flex items-center">
         <img class="mr-1" :src="clock" />
-        <span class="text-grey text-x-small" data-test-id="candidate-card-date">{{ formatDate }}</span>
+        <span class="text-grey text-x-small" data-test-id="candidate-card-date">{{
+          formatDate
+        }}</span>
       </div>
       <div class="mr-1 cursor-pointer">
         <button @click="setShowModal(true)" data-test-id="candidate-card-edit">
@@ -44,20 +48,20 @@ export default defineComponent({
   name: 'Candidate-card',
   props: {
     candidateData: {
-      type: Object as () => CandidateDTO ,
+      type: Object as () => CandidateDTO,
       required: true
     },
     draggable: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   components: {
     CardOptions,
     ModalForm
   },
   emits: ['dragstart', 'dragover', 'drop'],
-  setup(props, {emit}) {
+  setup(props, { emit }) {
     const showModal = ref<boolean>(false)
 
     const userName = computed<string>(
@@ -89,9 +93,8 @@ export default defineComponent({
     }
 
     const handleDragStart = (event: DragEvent) => {
-      emit('dragstart', event);
-    };
-
+      emit('dragstart', event)
+    }
 
     return {
       buttonImg,

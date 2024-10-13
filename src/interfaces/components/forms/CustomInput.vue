@@ -1,6 +1,8 @@
 <template>
   <div class="mw-full pt-3" :data-test-id="`custom-input-${label}`">
-    <label for="username" class="block text-sm font-medium" data-test-id="input-label">{{ label }}</label>
+    <label for="username" class="block text-sm font-medium" data-test-id="input-label">{{
+      label
+    }}</label>
     <div class="mt-2">
       <div class="flex border border-border rounded-md">
         <input
