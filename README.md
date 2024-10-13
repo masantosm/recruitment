@@ -25,6 +25,11 @@ npm install
 ```sh
 npm run dev
 ```
+### Unit Test
+
+```sh
+npm run test:unit
+```
 
 ### Type-Check, Compile and Minify for Production
 
