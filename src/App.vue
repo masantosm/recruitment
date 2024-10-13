@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-lvh w-auto bg-light-grey pl-20 box-border overflow-x-hidden">
+  <div class="flex h-full w-full bg-light-grey pl-5 sm:pl-10 md:pl-20 box-border">
     <NavBar></NavBar>
     <RouterView />
   </div>
@@ -14,6 +14,7 @@ body{
 }
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
   text-align: center;
 }
 

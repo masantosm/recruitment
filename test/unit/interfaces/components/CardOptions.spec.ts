@@ -56,10 +56,10 @@ describe('CardOptions.vue', () => {
 
   it('should render the button with the correct image', async () => {
     const CardOptions = wrapper.find('[data-test-id="card-options"]')
-    expect(CardOptions.exists()).toBe(true)
+    expect(CardOptions.exists()).toBeTruthy()
 
     const button = wrapper.find('[data-test-id="card-options-button"]')
-    expect(button.exists()).toBe(true)
+    expect(button.exists()).toBeTruthy()
     const cardOptionsList = wrapper.find('[data-test-id="card-options-list"]')
     expect(cardOptionsList.exists()).toBeFalsy()
   })
@@ -83,6 +83,6 @@ describe('CardOptions.vue', () => {
       },
       'vacancy-123'
     )
-    expect(wrapper.vm.isOpen).toBe(false)
+    expect(wrapper.vm.isOpen).toBeFalsy()
   })
 })

@@ -4,7 +4,7 @@ import HomeView from '@/interfaces/views/HomeView.vue'
 import { shallowMount } from '@vue/test-utils'
 import { createApp } from 'vue'
 import router from '@/interfaces/router'
-import { createPinia, Pinia } from 'pinia' // Importa createPinia
+import { createPinia, Pinia } from 'pinia'
 
 vi.mock('@/views/HomeView.vue', () => ({
   default: {

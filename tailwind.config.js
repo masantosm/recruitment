@@ -29,9 +29,15 @@ module.exports = {
       minHeight: {
         card: '592px'
       },
+      minWidth: {
+        card: '296px'
+      },
       fontSize: {
         normal: '16px',
         small: '12px'
+      },
+      fontFamily: {
+        figtree: ['Figtree', 'sans-serif']
       }
     }
   },
@@ -42,9 +48,6 @@ module.exports = {
     'node_modules/preline/dist/*.js',
     './node_modules/flowbite/**/*.js',
     './src/**/*.{html,js,vue}'
-  ], // Asegúrate de que este camino coincida con la estructura de tu proyecto
-  plugins: [
-    require('preline/plugin'), // Cambié el import dinámico por require
-    require('flowbite/plugin') // Cambié el import dinámico por require
-  ]
+  ],
+  plugins: []
 }

@@ -1,12 +1,12 @@
 <template> 
   <div
-    class="w-card min-h-card p-4 box-border rounded-xl border border-border mr-5"
+    class="w-card min-w-card min-h-card p-4 box-border rounded-xl border border-border mr-5 "
     data-test-id="card"
     @dragover="allowDrop" 
     @drop="dropCandidate" 
     > 
-    <div class="w-candidate pb-5">
-      <hr class="h-2 rounded-full border-0" :class="currentClass" />
+    <div class="w-full pb-5">
+      <hr class="w-full h-2 rounded-full border-0" :class="currentClass" />
       <div class="flex items-end mt-4">
         <img :src="currentIcon" class="w-button h-button" data-test-id="card-img" />
         <span class="ml-2 text-base font-bold">{{ config.name }}</span>

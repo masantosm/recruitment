@@ -8,7 +8,7 @@ describe('HeaderComponent component is definied', () => {
   })
   it('renders correctly with the given props', () => {
     const header = wrapper.find('[data-test-id="header-component"]')
-    expect(header.exists()).toBe(true)
+    expect(header.exists()).toBeTruthy()
   })
 
   it('check that func setShowModal works correctly', () => {
@@ -20,12 +20,12 @@ describe('HeaderComponent component is definied', () => {
   it('check opens modal when "Añadir candidato" button is clicked', async () => {
     const button = wrapper.find('[data-test-id="header-component-add-button"]')
     await button.trigger('click')
-    expect(wrapper.vm.showModal).toBe(true)
+    expect(wrapper.vm.showModal).toBeTruthy()
   })
   it('check closes modal when "close-modal" event is emitted from ModalForm', async () => {
     wrapper.vm.setShowModal(true)
     const modal = wrapper.findComponent({ name: 'ModalForm' })
     modal.vm.$emit('close-modal')
-    expect(wrapper.vm.showModal).toBe(false)
+    expect(wrapper.vm.showModal).toBeFalsy()
   })
 })
