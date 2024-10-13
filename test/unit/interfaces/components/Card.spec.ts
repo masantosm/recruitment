@@ -222,6 +222,7 @@ describe('CardComponent.vue', () => {
     }
     await wrapper.find('[data-test-id="card"]').trigger('dragover', mockDragEvent)
     expect(wrapper.emitted('dragover')).toBeTruthy()
+    expect(wrapper.vm.draggableZone).toBeTruthy()
   })
 
   it(' Card recieves event drop', async () => {
@@ -232,5 +233,15 @@ describe('CardComponent.vue', () => {
     }
     await wrapper.find('[data-test-id="card"]').trigger('drop', mockDragEvent)
     expect(wrapper.emitted('drop')).toBeTruthy()
+  })
+  it(' Card recieves event drop', async () => {
+    wrapper.vm.dropCandidate = vi.fn()
+    const mockDragEvent = {
+      dataTransfer: { setData: vi.fn() },
+      preventDefault: vi.fn()
+    }
+    await wrapper.find('[data-test-id="card"]').trigger('dragleave', mockDragEvent)
+    expect(wrapper.emitted('dragleave')).toBeTruthy()
+    expect(wrapper.vm.draggableZone).toBeFalsy()
   })
 })
