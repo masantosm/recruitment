@@ -45,7 +45,7 @@ export default defineComponent({
   },
   setup(props) {
     const candidateStore = useCandidateStore()
-    const draggableZone = ref<bookean>(false)
+    const draggableZone = ref<boolean>(false)
     const draggedCandidate = ref<CandidateDTO | null>(null)
     const currentVacancy = computed<string>(() => candidateStore.getVacancyID)
     const currentIcon = computed<string>(
@@ -54,7 +54,7 @@ export default defineComponent({
     const currentClass = computed<string>(() => `card__${props.config.order}`)
 
     const hasCandidates = computed<CandidateDTO[]>(() =>
-      candidateStore.getCandidates.filter((elem: CandidateDTO) => elem.statusId === props.config.id)
+      candidateStore.getFilteredCandidates.filter((elem: CandidateDTO) => elem.statusId === props.config.id)
     )
 
     const dragStart = (candidate: CandidateDTO, event: DragEvent) => {
