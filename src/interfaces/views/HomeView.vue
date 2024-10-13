@@ -1,11 +1,11 @@
 <template>
-  <main>
-    <div v-if="vacancyStatus.length" class="pl-10 flex">
-      <div class="pt-2 rounded-xl w-10/12">
-        <h1 class="font-bold text-3xl pb-5">Reclutamiento</h1>
+  <main class="w-[85%] bg-light-grey">
+    <div v-if="vacancyStatus.length" class="w-auto flex pl-16 justify-start">
+      <div class="pt-2 pr-10 rounded-xl w-full">
+        <h1 class="font-bold text-2xl sm:text-3xl pb-5">Reclutamiento</h1>
         <HeaderComponent></HeaderComponent>
-        <div class="flex flex-row content-between bg-white p-8 rounded-b-3xl overflow-x-auto">
-          <Card v-for="card in vacancyStatus" :key="card.id" :config="card"></Card>
+        <div class="w-full flex flex-col md:flex-row content-between bg-white shadow-xl p-4 sm:p-6 md:p-8 rounded-b-3xl overflow-x-auto gap-4">
+          <Card v-for="card in vacancyStatus" :key="card.id" :config="card" class="w-full md:w-1/3 lg:w-1/4"></Card>
         </div>
       </div>
     </div>

@@ -39,10 +39,10 @@ describe('CardComponent.vue', () => {
     })
   })
 
-  it('renders correctly with props', () => {
+  it('renders correctly with the given props', () => {
     const card = wrapper.find('[data-test-id="card"]')
-    expect(card.exists()).toBe(true)
-    expect(wrapper.exists()).toBe(true)
+    expect(card.exists()).toBeTruthy()
+    expect(wrapper.exists()).toBeTruthy()
     expect(wrapper.find('span').text()).toBe(config.name)
     const cardImg = wrapper.find('[data-test-id="card-img"]')
     expect(cardImg.attributes('src')).toBe(
@@ -57,7 +57,7 @@ describe('CardComponent.vue', () => {
     expect(cardImg.attributes('src')).toBe('src/interfaces/components/icons/icon-1.svg')
   })
 
-  it('renders the CandidateCard component when candidates are present', () => {
+  it('renders the CandidateCard component when has candidates', () => {
     const candidateCards = wrapper.findAllComponents({ name: 'CandidateCard' })
     expect(candidateCards.length).toBe(1)
     expect(candidateCards[0].props('candidateData')).toEqual(mockCandidates[0])
@@ -76,42 +76,35 @@ describe('CardComponent.vue', () => {
     expect(candidateCards.length).toBe(0)
   })
   it('check that the component receives the event dragover', async () => {
-    const candidate = { id: 1, name: 'John Doe' } // Ejemplo de candidato
+    const candidate = { id: 1, name: 'test-first-name' }
 
-    // Crear un mock para el evento DragEvent
     const mockDragEvent = {
       dataTransfer: {
-        setData: vi.fn() // Función espía para setData
+        setData: vi.fn()
       },
-      preventDefault: vi.fn() // Función espía para preventDefault
+      preventDefault: vi.fn()
     }
-
-    // Simular el dragstart
     await wrapper.vm.dragStart(candidate, mockDragEvent)
 
-    // Verificar que setData fue llamado con los datos correctos
     expect(mockDragEvent.dataTransfer.setData).toHaveBeenCalledWith(
       'candidate',
       JSON.stringify(candidate)
     )
   })
   it('check that the component receives the event drop', async () => {
-    // Crear un mock para el evento DragEvent
     const mockDragEvent = {
       preventDefault: vi.fn(),
       dataTransfer: {
-        getData: vi.fn().mockReturnValue(JSON.stringify({ id: 1, name: 'John Doe' }))
+        getData: vi.fn().mockReturnValue(JSON.stringify({ id: 1, name: 'test-first-name' }))
       }
     }
 
-    // Simular el dragover
     await wrapper.vm.allowDrop(mockDragEvent)
 
-    // Verificar que preventDefault fue llamado
     expect(mockDragEvent.preventDefault).toHaveBeenCalled()
   })
 
-  it('debe actualizar el estado del candidato al soltar', async () => {
+  it('check must update candidate status when releasing', async () => {
     const candidate: CandidateDTO = {
       firstName: 'test-name',
       lastName: 'test-last-name',
@@ -154,7 +147,7 @@ describe('CardComponent.vue', () => {
     )
   })
 
-  it('no debe actualizar el estado del candidato al soltar porque no hay candidato', async () => {
+  it('check must not update candidate status on release because there is no candidate', async () => {
     const candidate: CandidateDTO = {
       firstName: 'test-name',
       lastName: 'test-last-name',
@@ -198,7 +191,7 @@ describe('CardComponent.vue', () => {
   })
 
   it('handles drag start correctly', async () => {
-    const candidate = wrapper.vm.hasCandidates[0] // Obtiene el candidato
+    const candidate = wrapper.vm.hasCandidates[0]
     const dragEvent = {
       dataTransfer: {
         setData: vi.fn()
@@ -213,7 +206,7 @@ describe('CardComponent.vue', () => {
     )
   })
 
-  it('dragstart', async () => {
+  it('Card recieves event dragstart', async () => {
     const mockDragEvent = {
       dataTransfer: { setData: vi.fn() },
       preventDefault: vi.fn()
@@ -222,7 +215,7 @@ describe('CardComponent.vue', () => {
     expect(wrapper.emitted('dragstart')).toBeTruthy()
   })
 
-  it('dragover', async () => {
+  it('Card recieves event dragover', async () => {
     const mockDragEvent = {
       dataTransfer: { setData: vi.fn() },
       preventDefault: vi.fn()
@@ -231,7 +224,7 @@ describe('CardComponent.vue', () => {
     expect(wrapper.emitted('dragover')).toBeTruthy()
   })
 
-  it('drop', async () => {
+  it(' Card recieves event drop', async () => {
     wrapper.vm.dropCandidate = vi.fn()
     const mockDragEvent = {
       dataTransfer: { setData: vi.fn() },

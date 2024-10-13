@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white w-[256px] py-4 px-2" data-test-id="nav-var">
+  <div class="bg-white w-[256px] py-4 px-2 shadow-xl" data-test-id="nav-var">
     <div
       class="w-[240px] h-[40px] flex justify-center items-center border-dotted border text-grey border-grey"
       data-test-id="nav-var-logo"

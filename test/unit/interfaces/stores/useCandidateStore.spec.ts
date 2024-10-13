@@ -1,4 +1,3 @@
-// src/__tests__/candidateStore.test.ts
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
 import { useCandidateStore } from '@/interfaces/stores/useCandidateStore'
@@ -6,7 +5,6 @@ import CandidateService from '@/application/services/CandidateService'
 import type { CandidateDTO } from '@/application/dtos/CandidateDTO'
 import type { Status } from '@/domain/models/Status'
 
-// Mock the CandidateService
 vi.mock('@/application/services/CandidateService')
 
 describe('Candidate Store', () => {
@@ -14,7 +12,7 @@ describe('Candidate Store', () => {
 
   beforeEach(() => {
     setActivePinia(createPinia())
-    candidateStore = useCandidateStore() // Create a new instance of the store
+    candidateStore = useCandidateStore()
   })
 
   it('should initialize with an empty candidates array and status array', () => {

@@ -21,18 +21,18 @@ describe('CandidateCardComponent component is definied', () => {
 
   it('renders correctly with the given props', async () => {
     const candidateCard = wrapper.find('[data-test-id="candidate-card"]')
-    expect(candidateCard.exists()).toBe(true)
+    expect(candidateCard.exists()).toBeTruthy()
 
     const candidateCardDate = wrapper.find('[data-test-id="candidate-card-name"]')
-    expect(candidateCardDate.exists()).toBe(true)
+    expect(candidateCardDate.exists()).toBeTruthy()
     expect(candidateCardDate.text()).toStrictEqual('test-name test-lastname')
 
     const candidateCardName = wrapper.find('[data-test-id="candidate-card-date"]')
-    expect(candidateCardName.exists()).toBe(true)
+    expect(candidateCardName.exists()).toBeTruthy()
     expect(candidateCardName.text()).toStrictEqual('09/10/24')
 
     const candidateCardButton = wrapper.find('[data-test-id="candidate-card-edit"]')
-    expect(candidateCardButton.exists()).toBe(true)
+    expect(candidateCardButton.exists()).toBeTruthy()
     candidateCardButton.trigger('click')
     expect(wrapper.vm.showModal).toBeTruthy()
   })
@@ -41,7 +41,7 @@ describe('CandidateCardComponent component is definied', () => {
     wrapper.vm.setShowModal(true)
     const modal = wrapper.findComponent({ name: 'ModalForm' })
     modal.vm.$emit('close-modal')
-    expect(wrapper.vm.showModal).toBe(false)
+    expect(wrapper.vm.showModal).toBeFalsy()
   })
 
   it('check that the component receives the event dragstart', async () => {

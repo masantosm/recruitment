@@ -48,7 +48,7 @@ describe('HomeView.vue', () => {
 
   it('should render HeaderComponent', () => {
     const wrapper = shallowMount(HomeView)
-    expect(wrapper.findComponent(HeaderComponent).exists()).toBe(true)
+    expect(wrapper.findComponent(HeaderComponent).exists()).toBeTruthy()
   })
 
   it('should render Card components based on vacancyStatus', () => {
