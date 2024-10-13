@@ -1,9 +1,11 @@
 <template>
   <div
     class="w-card min-w-card min-h-card p-4 box-border rounded-xl border border-border mr-5"
+    :class="{'bg-light-grey' : draggableZone}"
     data-test-id="card"
     @dragover="allowDrop"
     @drop="dropCandidate"
+    @dragleave="handleDragLeave"
   >
     <div class="w-full pb-5">
       <hr class="w-full h-2 rounded-full border-0" :class="currentClass" />
@@ -43,7 +45,7 @@ export default defineComponent({
   },
   setup(props) {
     const candidateStore = useCandidateStore()
-
+    const draggableZone = ref<bookean>(false)
     const draggedCandidate = ref<CandidateDTO | null>(null)
     const currentVacancy = computed<string>(() => candidateStore.getVacancyID)
     const currentIcon = computed<string>(
@@ -62,13 +64,18 @@ export default defineComponent({
     }
 
     const allowDrop = (event: DragEvent) => {
+      draggableZone.value = true
       event.preventDefault()
     }
-
+    const handleDragLeave =  (event: DragEvent) => {
+      draggableZone.value = false
+      event.preventDefault()
+    }
     const dropCandidate = (event: DragEvent) => {
       event.preventDefault()
       const candidate = event.dataTransfer?.getData('candidate')
       if (candidate) {
+        draggableZone.value = false
         let currentCandidate = JSON.parse(candidate)
 
         const currentUserData: CandidateDTO = {
@@ -93,9 +100,11 @@ export default defineComponent({
       currentClass,
       hasCandidates,
       currentVacancy,
+      draggableZone,
       dragStart,
       allowDrop,
-      dropCandidate
+      dropCandidate,
+      handleDragLeave
     }
   }
 })
