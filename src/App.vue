@@ -9,7 +9,7 @@ import { RouterView } from 'vue-router'
 import NavBar from '@/interfaces/components/NavBar.vue'
 </script>
 <style>
-body{
+body {
   font-family: 'Figtree';
 }
 ::-webkit-scrollbar {

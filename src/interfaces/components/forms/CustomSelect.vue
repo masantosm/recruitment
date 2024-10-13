@@ -1,4 +1,4 @@
- <template>
+<template>
   <div class="w-full relative" data-test-id="custom-select">
     <div
       data-test-id="select"
@@ -12,7 +12,7 @@
       <div
         :data-test-id="`option-${index}`"
         class="p-2 hover:bg-light-grey cursor-pointer z-10"
-        v-for="(item,index) in options"
+        v-for="(item, index) in options"
         :key="index"
         @click="selectItem(item)"
       >
@@ -65,5 +65,4 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

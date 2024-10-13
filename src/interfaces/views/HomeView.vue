@@ -4,8 +4,15 @@
       <div class="pt-2 pr-10 rounded-xl w-full">
         <h1 class="font-bold text-2xl sm:text-3xl pb-5">Reclutamiento</h1>
         <HeaderComponent></HeaderComponent>
-        <div class="w-full flex flex-col md:flex-row content-between bg-white shadow-xl p-4 sm:p-6 md:p-8 rounded-b-3xl overflow-x-auto gap-4">
-          <Card v-for="card in vacancyStatus" :key="card.id" :config="card" class="w-full md:w-1/3 lg:w-1/4"></Card>
+        <div
+          class="w-full flex flex-col md:flex-row content-between bg-white shadow-xl p-4 sm:p-6 md:p-8 rounded-b-3xl overflow-x-auto gap-4"
+        >
+          <Card
+            v-for="card in vacancyStatus"
+            :key="card.id"
+            :config="card"
+            class="w-full md:w-1/3 lg:w-1/4"
+          ></Card>
         </div>
       </div>
     </div>

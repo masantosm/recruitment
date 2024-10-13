@@ -1,5 +1,5 @@
 <template>
-  <header class="p-8 pb-0 bg-white rounded-t-3xl  shadow-xl" data-test-id="header-component">
+  <header class="p-8 pb-0 bg-white rounded-t-3xl shadow-xl" data-test-id="header-component">
     <div class="flex items-center border-b border-border">
       <a
         rel="noopener noreferrer"
