@@ -7,13 +7,15 @@ interface CandidateState {
   candidates: CandidateDTO[]
   vacancyStatus: Status[]
   vacancyId: string
+  filterValue: string
 }
 
 export const useCandidateStore = defineStore('candidate', {
   state: (): CandidateState => ({
     candidates: [],
     vacancyStatus: [],
-    vacancyId: '106ec090-e5a5-45af-b82f-a3b5eda4117c'
+    vacancyId: '106ec090-e5a5-45af-b82f-a3b5eda4117c',
+    filterValue: ''
   }),
 
   actions: {
@@ -32,6 +34,9 @@ export const useCandidateStore = defineStore('candidate', {
     async createNewCandidate(candidate: CandidateDTO, vacancyId: string) {
       await CandidateService.createCandidate(candidate)
       this.loadCandidatesVacancy(vacancyId)
+    },
+    async setFilterValue(value: string) {
+      this.filterValue = value
     }
   },
 
@@ -44,6 +49,17 @@ export const useCandidateStore = defineStore('candidate', {
     },
     getVacancyID: (state) => {
       return state.vacancyId
+    },
+    getFilteredCandidates: (state): CandidateDTO[] => {
+      if (!state.filterValue) {
+        return state.candidates
+      }
+
+      return state.candidates.filter(
+        (candidate) =>
+          candidate.firstName.toLowerCase().includes(state.filterValue.toLowerCase()) ||
+          candidate.lastName.toLowerCase().includes(state.filterValue.toLowerCase())
+      )
     }
   }
 })

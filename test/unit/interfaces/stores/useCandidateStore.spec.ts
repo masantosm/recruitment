@@ -100,6 +100,14 @@ describe('Candidate Store', () => {
     expect(CandidateService.fetchCandidates).toHaveBeenCalledWith(vacancyId)
   })
 
+  it('should update filterValue', async () => {
+    const filterValueMock = 'test'
+
+    await candidateStore.setFilterValue(filterValueMock)
+
+    expect(candidateStore.filterValue).toStrictEqual(filterValueMock)
+  })
+
   it('should create a new candidate', async () => {
     const mockCandidate: CandidateDTO = {
       firstName: 'test-name',
@@ -151,5 +159,38 @@ describe('Candidate Store', () => {
 
     candidateStore.vacancyStatus = mockStatus
     expect(candidateStore.getCandidateStatus).toEqual(mockStatus)
+  })
+
+  it('should return candidates from getter wihtout filter', () => {
+    const mockCandidates: CandidateDTO[] = [
+      {
+        firstName: 'test-name',
+        lastName: 'test-lastname',
+        vacancyId: 'test-vacancy-id',
+        statusId: 'status-id',
+        candidateId: 'candidate-id',
+        updatedAt: 'date'
+      },
+      {
+        firstName: 'test-name-2',
+        lastName: 'test-lastname-2',
+        vacancyId: 'test-vacancy-id',
+        statusId: 'status-id',
+        candidateId: 'candidate-id-2',
+        updatedAt: 'date'
+      }
+    ]
+    candidateStore.candidates = mockCandidates
+    candidateStore.setFilterValue('')
+    expect(candidateStore.getFilteredCandidates).toHaveLength(2)
+    expect(candidateStore.getFilteredCandidates).toEqual(mockCandidates)
+
+    candidateStore.setFilterValue('lastname-2')
+    expect(candidateStore.getFilteredCandidates).toHaveLength(1)
+    expect(candidateStore.getFilteredCandidates).toEqual([mockCandidates[1]])
+
+    candidateStore.setFilterValue('miguel')
+    expect(candidateStore.getFilteredCandidates).toHaveLength(0)
+    expect(candidateStore.getFilteredCandidates).toEqual([])
   })
 })
