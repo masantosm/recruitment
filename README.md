@@ -1,6 +1,6 @@
 # Recruitmen Crud
 
-A vacancy system that allows you to update the vacancy status of candidates. Candidates can be added via the Add candidates butto. It can be updated in three different ways.
+A vacancy system that allows you to update the vacancy status of candidates. Candidates can be filtered using the search input. Candidates can be added via the Add candidates button. It can be updated in three different ways.
 - First option: By clicking on the top right menu and ticking the chosen option.
 - Second option: Editing the candidate, by clicking on the bottom right button and editing the status (in this option you can also edit the name and surname of the candidate).
 - Third option: Drag the candidate card to the status to which you want the candidate to be moved.
