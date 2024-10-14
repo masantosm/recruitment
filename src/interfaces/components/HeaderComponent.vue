@@ -53,12 +53,12 @@ export default defineComponent({
   },
   setup() {
     const showModal = ref<boolean>(false)
-    const store = useCandidateStore();
+    const store = useCandidateStore()
 
     const filterValue = computed({
       get: () => store.filterValue,
       set: (value) => store.setFilterValue(value)
-    });
+    })
     const setShowModal = (value: boolean) => {
       showModal.value = value
     }

@@ -1,7 +1,7 @@
 <template>
   <div
     class="w-card min-w-card min-h-card p-4 box-border rounded-xl border border-border mr-5"
-    :class="{'bg-light-grey' : draggableZone}"
+    :class="{ 'bg-light-grey': draggableZone }"
     data-test-id="card"
     @dragover="allowDrop"
     @drop="dropCandidate"
@@ -54,7 +54,9 @@ export default defineComponent({
     const currentClass = computed<string>(() => `card__${props.config.order}`)
 
     const hasCandidates = computed<CandidateDTO[]>(() =>
-      candidateStore.getFilteredCandidates.filter((elem: CandidateDTO) => elem.statusId === props.config.id)
+      candidateStore.getFilteredCandidates.filter(
+        (elem: CandidateDTO) => elem.statusId === props.config.id
+      )
     )
 
     const dragStart = (candidate: CandidateDTO, event: DragEvent) => {
@@ -67,7 +69,7 @@ export default defineComponent({
       draggableZone.value = true
       event.preventDefault()
     }
-    const handleDragLeave =  (event: DragEvent) => {
+    const handleDragLeave = (event: DragEvent) => {
       draggableZone.value = false
       event.preventDefault()
     }
