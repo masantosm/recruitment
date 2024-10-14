@@ -1,18 +1,9 @@
-# recruitmen-crud
+# Recruitmen Crud
 
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+A vacancy system that allows you to update the vacancy status of candidates. Candidates can be filtered using the search input. Candidates can be added via the Add candidates button. It can be updated in three different ways.
+- First option: By clicking on the top right menu and ticking the chosen option.
+- Second option: Editing the candidate, by clicking on the bottom right button and editing the status (in this option you can also edit the name and surname of the candidate).
+- Third option: Drag the candidate card to the status to which you want the candidate to be moved.
 
 ## Project Setup
 
@@ -24,6 +15,11 @@ npm install
 
 ```sh
 npm run dev
+```
+### Unit Test
+
+```sh
+npm run test:unit
 ```
 
 ### Type-Check, Compile and Minify for Production

@@ -1,16 +1,12 @@
-import { fileURLToPath, URL } from 'node:url'
-
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import vue from '@vitejs/plugin-vue'
-import vueDevTools from 'vite-plugin-vue-devtools'
-import istanbul from 'vite-plugin-istanbul'
+import path from 'path'
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), vueDevTools(), istanbul()],
+  plugins: [vue()],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': path.resolve(__dirname, 'src')
     }
   },
   test: {
@@ -22,7 +18,7 @@ export default defineConfig({
       include: ['src/**/*.ts', 'src/**/*.vue'],
       exclude: ['**/node_modules/**', '**/*.spec.ts', '**/App.vue', '**/main.ts']
     },
-    exclude: ['**/src/interfaces/router/**', '**/node_modules/**', '**/App.vue', '**/main.ts'],
+    exclude: ['**/src/interfaces/router/**', '**/node_modules/**'],
     clearMocks: true
   }
 })
